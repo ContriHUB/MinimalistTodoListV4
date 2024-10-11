@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "38951874318",
+    "project_id": "minimalist-to-do",
+    "storage_bucket": "minimalist-to-do.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38951874318:android:c36a7c4dcaf9f0d8db315f",
+        "android_client_info": {
+          "package_name": "com.minimalisttodolist.pleasebethelastrecyclerview"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqb2LK7heBXPaa_FT5c8CXRCzRgAPe460"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
