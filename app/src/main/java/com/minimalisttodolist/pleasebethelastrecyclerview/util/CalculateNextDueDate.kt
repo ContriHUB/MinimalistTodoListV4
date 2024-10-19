@@ -11,12 +11,15 @@ import java.time.ZoneId
 fun calculateNextDueDate(dueDate: Long?, recurrenceType: RecurrenceType): Long? {
     if (dueDate == null) return null
     val dateTime = Instant.ofEpochMilli(dueDate).atZone(ZoneId.systemDefault()).toLocalDateTime()
-    val nextDateTime = when (recurrenceType) {
-        RecurrenceType.DAILY -> dateTime.plusDays(1)
-        RecurrenceType.WEEKLY -> dateTime.plusWeeks(1)
-        RecurrenceType.MONTHLY -> dateTime.plusMonths(1)
-        RecurrenceType.YEARLY -> dateTime.plusYears(1)
-        else -> return null
+    var nextDateTime = dateTime
+    while (nextDateTime.isBefore(LocalDateTime.now())) {
+        nextDateTime = when (recurrenceType) {
+            RecurrenceType.DAILY -> nextDateTime.plusDays(1)
+            RecurrenceType.WEEKLY -> nextDateTime.plusWeeks(1)
+            RecurrenceType.MONTHLY -> nextDateTime.plusMonths(1)
+            RecurrenceType.YEARLY -> nextDateTime.plusYears(1)
+            else -> return null
+        }
     }
     return nextDateTime.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
 }

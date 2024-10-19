@@ -246,7 +246,7 @@ class TaskViewModel(
                 title = task.title,
                 priority = task.priority,
                 note = task.note,
-                dueDate = task.dueDate,
+                dueDate = calculateNextDueDate(task.dueDate, task.recurrenceType),
                 dueDateOnly = dueDateOnly,
                 dueTimeOnly = dueTimeOnly,
                 recurrenceType = task.recurrenceType,
@@ -259,7 +259,10 @@ class TaskViewModel(
     private fun handleSetDueDate(dueDate: LocalDate?) {
         _state.update {
             it.copy(dueDateOnly = dueDate).also { updatedState ->
-                combineDateAndTime(updatedState)
+                val nextDueDate = calculateNextDueDate(updatedState.dueDate?.toEpochMilli(), updatedState.recurrenceType)
+                it.copy(dueDate = nextDueDate).also { finalState ->
+                    combineDateAndTime(finalState)
+                }
             }
         }
     }
